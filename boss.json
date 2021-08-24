@@ -1,0 +1,12 @@
+{
+	"name": "business",
+	"description": "",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "src",
+	"projects": [],
+	"dependencies": {
+		"github.com/hashload/horse": "^2.0.13",
+		"https://github.com/viniciussanchez/dataset-serialize": "^v2.3.3"
+	}
+}
