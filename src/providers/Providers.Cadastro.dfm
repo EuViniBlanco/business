@@ -1,4 +1,5 @@
 inherited ProvidersCadastro: TProvidersCadastro
+  OldCreateOrder = True
   Width = 567
   object qryPesquisa: TFDQuery
     CachedUpdates = True
