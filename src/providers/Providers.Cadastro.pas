@@ -21,6 +21,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    constructor Create; reintroduce;
     function Append(const AJson: TJSONObject): Boolean; virtual;
     function Update(const AJson: TJSONObject): Boolean; virtual;
     function Delete: Boolean; virtual;
@@ -48,6 +49,11 @@ begin
    qryCadastro.Open();
    qryCadastro.LoadFromJSON(AJson, False);
    Result := qryCadastro.ApplyUpdates(0) = 0;
+end;
+
+constructor TProvidersCadastro.Create;
+begin
+  inherited Create(nil);
 end;
 
 function TProvidersCadastro.Delete: Boolean;
@@ -79,7 +85,7 @@ begin
       qryPesquisa.FetchOptions.RowsetSize := StrToIntDef(AParams.Items['limit'], 50);
     end;
     if AParams.ContainsKey('offset') then
-      qryPesquisa.FetchOptions.RecsSkip := StrToIntDef(AParams.Items['offset', 0]);
+      qryPesquisa.FetchOptions.RecsSkip := StrToIntDef(AParams.Items['offset'], 0);
     qryPesquisa.Open();
     Result := qryPesquisa;
 end;

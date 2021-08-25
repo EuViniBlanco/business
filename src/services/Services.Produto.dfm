@@ -37,4 +37,37 @@ inherited ServiceProduto: TServiceProduto
       '  from produto p'
       ' where 1 = 1')
   end
+  inherited qryCadastro: TFDQuery
+    SQL.Strings = (
+      'select p.id, p.nome, p.valor, p.status, p.estoque'
+      '  from produto p')
+    object qryCadastroid: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'id'
+      Origin = 'id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryCadastronome: TWideStringField
+      FieldName = 'nome'
+      Origin = 'nome'
+      Size = 60
+    end
+    object qryCadastrovalor: TFMTBCDField
+      FieldName = 'valor'
+      Origin = 'valor'
+      Precision = 20
+      Size = 4
+    end
+    object qryCadastrostatus: TSmallintField
+      FieldName = 'status'
+      Origin = 'status'
+    end
+    object qryCadastroestoque: TFMTBCDField
+      FieldName = 'estoque'
+      Origin = 'estoque'
+      Precision = 20
+      Size = 4
+    end
+  end
 end

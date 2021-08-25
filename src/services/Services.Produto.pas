@@ -17,6 +17,11 @@ type
     qryPesquisavalor: TFMTBCDField;
     qryPesquisastatus: TSmallintField;
     qryPesquisaestoque: TFMTBCDField;
+    qryCadastroid: TLargeintField;
+    qryCadastronome: TWideStringField;
+    qryCadastrovalor: TFMTBCDField;
+    qryCadastrostatus: TSmallintField;
+    qryCadastroestoque: TFMTBCDField;
   private
     { Private declarations }
   public
