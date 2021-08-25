@@ -86,7 +86,8 @@ end;
 
 function TProvidersCadastro.Update(const AJson: TJSONObject): Boolean;
 begin
-
+    qryCadastro.MergeFromJSONObject(AJson, False);
+    Result := qryCadastro.ApplyUpdates(0) = 0;
 end;
 
 end.

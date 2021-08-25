@@ -6,7 +6,8 @@ program business;
 
 uses
   Horse,
-  Providers.Connection in 'src\providers\Providers.Connection.pas' {ProvidersConnection: TDataModule};
+  Providers.Connection in 'src\providers\Providers.Connection.pas' {ProvidersConnection: TDataModule},
+  Providers.Cadastro in 'src\providers\Providers.Cadastro.pas' {ProvidersCadastro: TDataModule};
 
 begin
   THorse.Get('/ping',
