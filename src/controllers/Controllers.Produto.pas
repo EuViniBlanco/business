@@ -6,35 +6,35 @@ uses horse;
 
 procedure Registry;
 
-//  THorse.Get('/produtos',
-//    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
-//    begin
-//      Res.Send();
-//    end);
+// THorse.Get('/produtos',
+// procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+// begin
+// Res.Send();
+// end);
 //
-//  THorse.Get('/produtos/:id',
-//    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
-//    begin
-//      Res.Send();
-//    end);
+// THorse.Get('/produtos/:id',
+// procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+// begin
+// Res.Send();
+// end);
 //
-//  THorse.Post('/produtos',
-//    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
-//    begin
-//      Res.Send();
-//    end);
+// THorse.Post('/produtos',
+// procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+// begin
+// Res.Send();
+// end);
 //
-//  THorse.Put('/produtos/:id',
-//    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
-//    begin
-//      Res.Send();
-//    end);
+// THorse.Put('/produtos/:id',
+// procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+// begin
+// Res.Send();
+// end);
 //
-//  THorse.Delete('/produtos/:id',
-//    procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
-//    begin
-//      Res.Send();
-//    end);
+// THorse.Delete('/produtos/:id',
+// procedure(Req: THorseRequest; Res: THorseResponse; Next: TProc)
+// begin
+// Res.Send();
+// end);
 
 implementation
 
@@ -68,7 +68,8 @@ begin
   end;
 end;
 
-procedure CadastrarProduto(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure CadastrarProduto(Req: THorseRequest; Res: THorseResponse;
+  Next: TProc);
 var
   LService: TServiceProduto;
 begin
