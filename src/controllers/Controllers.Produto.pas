@@ -38,7 +38,7 @@ procedure Registry;
 
 implementation
 
-uses Services.Produto, System.JSON, DataSet.Serialize;
+uses Services.Produto, System.JSON, DataSet.Serialize, Data.DB;
 
 procedure ListarProdutos(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
@@ -58,11 +58,16 @@ end;
 
 procedure ObterProduto(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdProduto: string;
   LService: TServiceProduto;
 begin
   LService := TServiceProduto.Create;
   try
-    Res.Send('');
+    LIdProduto := Req.Params['id'];
+    if LService.GetById(LIdProduto).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Produto não cadastrado');
+    Res.Send(LService.qryCadastro.ToJSONObject());
   finally
     LService.Free;
   end;
@@ -71,11 +76,14 @@ end;
 procedure CadastrarProduto(Req: THorseRequest; Res: THorseResponse;
   Next: TProc);
 var
+  LProduto: TJSONObject;
   LService: TServiceProduto;
 begin
   LService := TServiceProduto.Create;
   try
-    Res.Send('');
+    LProduto := Req.Body<TJSONObject>;
+    if LService.Append(LProduto) then
+      Res.Send(LService.qryCadastro.ToJSONObject()).Status(THTTPStatus.Created);
   finally
     LService.Free;
   end;
