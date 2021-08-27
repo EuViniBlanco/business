@@ -91,11 +91,19 @@ end;
 
 procedure AlterarProduto(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdProduto: string;
   LService: TServiceProduto;
+  LProduto: TJSONObject;
 begin
   LService := TServiceProduto.Create;
   try
-    Res.Send('');
+    LIdProduto := Req.Params['id'];
+    if LService.GetById(LIdProduto).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Produto não cadastrado');
+    LProduto := Req.Body<TJSONObject>;
+    if LService.Update(LProduto) then
+      Res.Status(THTTPStatus.NoContent);
   finally
     LService.Free;
   end;
