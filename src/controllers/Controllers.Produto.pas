@@ -111,11 +111,17 @@ end;
 
 procedure DeletarProduto(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdProduto: string;
   LService: TServiceProduto;
 begin
   LService := TServiceProduto.Create;
   try
-    Res.Send('');
+    LIdProduto := Req.Params['id'];
+    if LService.GetById(LIdProduto).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Produto não cadastrado');
+    if LService.Delete then
+      Res.Status(THTTPStatus.NoContent);
   finally
     LService.Free;
   end;
