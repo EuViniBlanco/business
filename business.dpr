@@ -6,6 +6,7 @@ program business;
 uses
   Horse,
   Horse.Jhonson,
+  Horse.HandleException,
   Providers.Connection
     in 'src\providers\Providers.Connection.pas' {ProvidersConnection: TDataModule} ,
   Providers.Cadastro
@@ -15,7 +16,9 @@ uses
   Controllers.Produto in 'src\controllers\Controllers.Produto.pas';
 
 begin
-  THorse.Use(Jhonson());
+  THorse
+    .Use(Jhonson())
+    .Use(HandleException);
 
   Controllers.Produto.Registry;
 
