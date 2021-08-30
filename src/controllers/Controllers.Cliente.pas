@@ -1,4 +1,4 @@
-unit Controllers.Cliente;
+﻿unit Controllers.Cliente;
 
 interface
 
@@ -6,7 +6,7 @@ procedure Registry;
 
 implementation
 
-uses Horse, Services.Cliente, System.JSON, DataSet.Serialize;
+uses Horse, Services.Cliente, System.JSON, DataSet.Serialize, Data.DB;
 
 procedure ListarClientes(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
@@ -26,11 +26,16 @@ end;
 
 procedure ObterCliente(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdCliente: string;
   LService: TServiceCliente;
 begin
   LService := TServiceCliente.Create;
   try
-
+    LIdCliente := Req.Params['id'];
+    if LService.GetById(LIdCliente).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Cliente n�o cadastrado');
+    Res.Send(LService.qryCadastro.ToJSONObject());
   finally
     LService.Free;
   end;
@@ -39,23 +44,34 @@ end;
 procedure CadastrarCliente(Req: THorseRequest; Res: THorseResponse;
   Next: TProc);
 var
+  LCliente: TJSONObject;
   LService: TServiceCliente;
 begin
   LService := TServiceCliente.Create;
   try
-
+    LCliente := Req.Body<TJSONObject>;
+    if LService.Append(LCliente) then
+      Res.Send(LService.qryCadastro.ToJSONObject()).Status(THTTPStatus.Created);
   finally
     LService.Free;
   end;
 end;
 
-procedure AlterarCLiente(Req: THorseRequest; Res: THorseResponse; Next: TProc);
+procedure AlterarCliente(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdCliente: string;
   LService: TServiceCliente;
+  LCliente: TJSONObject;
 begin
   LService := TServiceCliente.Create;
   try
-
+    LIdCliente := Req.Params['id'];
+    if LService.GetById(LIdCliente).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Cliente n�o cadastrado');
+    LCliente := Req.Body<TJSONObject>;
+    if LService.Update(LCliente) then
+      Res.Status(THTTPStatus.NoContent);
   finally
     LService.Free;
   end;
@@ -63,11 +79,17 @@ end;
 
 procedure DeletarCliente(Req: THorseRequest; Res: THorseResponse; Next: TProc);
 var
+  LIdCliente: string;
   LService: TServiceCliente;
 begin
   LService := TServiceCliente.Create;
   try
-
+    LIdCliente := Req.Params['id'];
+    if LService.GetById(LIdCliente).IsEmpty then
+      raise EHorseException.Create(THTTPStatus.NotFound,
+        'Cliente n�o cadastrado');
+    if LService.Delete then
+      Res.Status(THTTPStatus.NoContent);
   finally
     LService.Free;
   end;
@@ -75,11 +97,11 @@ end;
 
 procedure Registry;
 begin
-  THorse.Get('\clientes', ListarClientes);
-  THorse.Get('\clientes/:id', ObterCliente);
-  THorse.Post('\clientes', CadastrarCliente);
-  THorse.Put('\clientes', AlterarCLiente);
-  THorse.Delete('\clientes', DeletarCliente);
+  THorse.Get('/clientes', ListarClientes);
+  THorse.Get('/clientes/:id', ObterCliente);
+  THorse.Post('/clientes', CadastrarCliente);
+  THorse.Put('/clientes/:id', AlterarCliente);
+  THorse.Delete('/clientes/:id', DeletarCliente);
 end;
 
 end.

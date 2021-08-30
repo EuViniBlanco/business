@@ -1,4 +1,4 @@
-unit Controllers.Produto;
+ï»¿unit Controllers.Produto;
 
 interface
 
@@ -66,7 +66,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto não cadastrado');
+        'Produto nï¿½o cadastro');
     Res.Send(LService.qryCadastro.ToJSONObject());
   finally
     LService.Free;
@@ -100,7 +100,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto não cadastrado');
+        'Produto nï¿½o cadastro');
     LProduto := Req.Body<TJSONObject>;
     if LService.Update(LProduto) then
       Res.Status(THTTPStatus.NoContent);
@@ -119,7 +119,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto não cadastrado');
+        'Produto nï¿½o cadastro');
     if LService.Delete then
       Res.Status(THTTPStatus.NoContent);
   finally
@@ -133,7 +133,7 @@ begin
   THorse.Get('/produtos/:id', ObterProduto);
   THorse.Post('/produtos', CadastrarProduto);
   THorse.Put('/produtos/:id', AlterarProduto);
-  THorse.Get('/produtos/:id', DeletarProduto);
+  THorse.Delete('/produtos/:id', DeletarProduto);
 end;
 
 end.
