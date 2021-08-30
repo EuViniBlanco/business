@@ -34,7 +34,7 @@ begin
     LIdCliente := Req.Params['id'];
     if LService.GetById(LIdCliente).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Cliente n�o cadastrado');
+        'Cliente não cadastrado');
     Res.Send(LService.qryCadastro.ToJSONObject());
   finally
     LService.Free;
@@ -68,7 +68,7 @@ begin
     LIdCliente := Req.Params['id'];
     if LService.GetById(LIdCliente).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Cliente n�o cadastrado');
+        'Cliente não cadastrado');
     LCliente := Req.Body<TJSONObject>;
     if LService.Update(LCliente) then
       Res.Status(THTTPStatus.NoContent);
@@ -87,7 +87,7 @@ begin
     LIdCliente := Req.Params['id'];
     if LService.GetById(LIdCliente).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Cliente n�o cadastrado');
+        'Cliente não cadastrado');
     if LService.Delete then
       Res.Status(THTTPStatus.NoContent);
   finally

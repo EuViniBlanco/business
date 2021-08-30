@@ -12,7 +12,8 @@ uses
   Services.Produto in 'src\services\Services.Produto.pas' {ServiceProduto: TDataModule},
   Controllers.Produto in 'src\controllers\Controllers.Produto.pas',
   Services.Cliente in 'src\services\Services.Cliente.pas' {ServicesCliente: TDataModule},
-  Controllers.Cliente in 'src\controllers\Controllers.Cliente.pas';
+  Controllers.Cliente in 'src\controllers\Controllers.Cliente.pas',
+  Services.Pedido in 'src\services\Services.Pedido.pas' {ServicePedido: TDataModule};
 
 begin
   THorse

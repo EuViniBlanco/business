@@ -66,7 +66,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto n�o cadastro');
+        'Produto não cadastro');
     Res.Send(LService.qryCadastro.ToJSONObject());
   finally
     LService.Free;
@@ -100,7 +100,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto n�o cadastro');
+        'Produto não cadastro');
     LProduto := Req.Body<TJSONObject>;
     if LService.Update(LProduto) then
       Res.Status(THTTPStatus.NoContent);
@@ -119,7 +119,7 @@ begin
     LIdProduto := Req.Params['id'];
     if LService.GetById(LIdProduto).IsEmpty then
       raise EHorseException.Create(THTTPStatus.NotFound,
-        'Produto n�o cadastro');
+        'Produto não cadastro');
     if LService.Delete then
       Res.Status(THTTPStatus.NoContent);
   finally
