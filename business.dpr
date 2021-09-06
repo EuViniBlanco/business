@@ -13,7 +13,8 @@ uses
   Controllers.Produto in 'src\controllers\Controllers.Produto.pas',
   Services.Cliente in 'src\services\Services.Cliente.pas' {ServicesCliente: TDataModule},
   Controllers.Cliente in 'src\controllers\Controllers.Cliente.pas',
-  Services.Pedido in 'src\services\Services.Pedido.pas' {ServicePedido: TDataModule};
+  Services.Pedido in 'src\services\Services.Pedido.pas' {ServicePedido: TDataModule},
+  Controllers.Pedido in 'src\controllers\Controllers.Pedido.pas';
 
 begin
   THorse
